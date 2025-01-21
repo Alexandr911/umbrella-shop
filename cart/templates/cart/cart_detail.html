@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <ul>
+        {% for item in cart_items %}
+            <li>
+                {{ item.product.name }} — {{ item.quantity }} шт. — {{ item.product.price|floatformat:2 }} USD
+            </li>
+        {% endfor %}
+    </ul>
+    <h2>Total: {{ total_price|floatformat:2 }} USD</h2>
+</body>
+</html>
