@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cart/', include('cart.urls')),
     path('orders/', include('orders.urls')),  # маршруты заказов
+    path('', include('products.urls')),  # маршруты для продуктов
+
 ]

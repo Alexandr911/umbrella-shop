@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Welcome to Umbrella Shop</h1>
+    <p>Find the perfect umbrella for any weather!</p>
+
+    <h2>Our Products</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                {{ product.name }} - {{ product.price }} USD
+                <a href="{% url 'cart_add' product.id %}">Add to Cart</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

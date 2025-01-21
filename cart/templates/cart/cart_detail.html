@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
     <h1>Your Cart</h1>
-    <ul>
-        {% for item in cart_items %}
-            <li>
-                {{ item.product.name }} — {{ item.quantity }} шт. — {{ item.product.price|floatformat:2 }} USD
-                <a href="{% url 'remove_from_cart' item.id %}">Remove</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <h2>Total: {{ total_price|floatformat:2 }} USD</h2>
-</body>
-</html>
+    {% if cart_items %}
+        <ul>
+            {% for item in cart_items %}
+                <li>
+                    {{ item.product.name }} - {{ item.quantity }}
+                    <a href="{% url 'cart_remove' item.id %}">Remove</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <p><a href="/orders/create/">Proceed to Checkout</a></p>
+    {% else %}
+        <p>Your cart is empty.</p>
+        <a href="/">Continue Shopping</a>
+    {% endif %}
+{% endblock %}
