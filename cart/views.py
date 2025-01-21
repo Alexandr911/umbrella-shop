@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import JsonResponse
 from .models import CartItem
 from products.models import Product
+from .cart import Cart  # предполагается, что есть логика корзины
+
 
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -40,3 +42,13 @@ def remove_from_cart(request, cart_item_id):
     cart_item = get_object_or_404(CartItem, id=cart_item_id)
     cart_item.delete()
     return redirect('cart_detail')
+
+def cart_add(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart = Cart(request)
+    cart.add(product=product)
+    return redirect('product_list')
+
+def cart_detail(request):
+    cart = Cart(request)
+    return render(request, 'cart/detail.html', {'cart': cart})
